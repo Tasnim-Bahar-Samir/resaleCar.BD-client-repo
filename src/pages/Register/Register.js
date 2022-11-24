@@ -1,16 +1,56 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { authProvider } from "../../Context/UserContext";
+import useToken from "../../Hooks/useToken";
 
 const Register = () => {
+  const{user,createUser,updateUser} = useContext(authProvider)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation()
+  const from = location.state?.from?.pathnam || '/'
+  const navigate = useNavigate()
+  const [userEmail,setUserEmail] = useState('')
+  const [token] = useToken(userEmail);
+  if(token){
+    navigate(from,{replace:true})
+  }
   const onRegister = (data) => {
     console.log(data);
+    const {name,email,password,mode} = data;
+    console.log(name,email,password)
+    createUser(email,password)
+        .then(result => {
+          console.log(result.user)
+          const userInfo = {
+            displayName : name
+          }
+          updateUser(userInfo)
+          .then(() =>{})
+          .catch(err => console.error(err))
+          saveUserToDb(name,email,mode)
+        } )
+        .catch(err => console.error(err))
   };
+  const saveUserToDb = (name,email,mode)=>{
+    const user = {name,email,mode}
+    fetch('http://localhost:5000/users',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      setUserEmail(email)
+    })
+  }
   return (
     <div>
       <div className="hero my-20">
@@ -52,11 +92,11 @@ const Register = () => {
               </div>
               <div className="form-control mt-5">
                 <input
-                  {...register("Your password", {
+                  {...register("password", {
                     required: "Password is required",
                   })}
                   type="password"
-                  placeholder="password"
+                  placeholder="Your password"
                   className="focus:outline-none border-b-2 p-2"
                 />
                 {errors.password && (

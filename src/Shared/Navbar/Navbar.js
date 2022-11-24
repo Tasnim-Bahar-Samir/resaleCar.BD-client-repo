@@ -1,16 +1,30 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authProvider } from "../../Context/UserContext";
 
 const Navbar = () => {
-  const {user} = useContext(authProvider)
+  const {user,userLogout} = useContext(authProvider)
+  const navigate = useNavigate()
+  const handleLogout = ()=>{
+  userLogout()
+  .then(()=>{
+    navigate('/login')
+  })
+  .catch(err => console.error(err))
+  }
     const menuItem = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/dashboard'>Dashboard</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-        <li><Link to=''>{user?.name}</Link></li>
+        {
+          user?.uid ?
+          <li onClick={handleLogout}><Link>Logout</Link></li>
+          :
+          <li><Link to='/login'>Login</Link></li>
+        }
+        
+        
     </>
   return (
     <div>
