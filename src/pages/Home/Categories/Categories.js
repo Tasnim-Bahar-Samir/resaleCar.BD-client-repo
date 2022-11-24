@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../../../Components/Spinner';
+import { Link } from 'react-router-dom';
 
 
 const Categories = () => {
@@ -26,7 +27,7 @@ const Categories = () => {
             <div className="card-body">
                 <p>Category Name:{category.categoryName}</p>
               <div className="card-actions text-left">
-                <button className="btn btn-primary">Visit</button>
+                <button className="btn btn-primary"><Link to={`category/product/${category.categoryName}`}>Visit</Link></button>
               </div>
             </div>
           </div>)

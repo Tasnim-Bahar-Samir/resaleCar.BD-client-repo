@@ -4,6 +4,7 @@ import Blog from "../pages/Blog/Blog";
 import AddProduct from "../pages/Dashboard/Addproduct/AddProduct";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Error from "../pages/Error/Error";
+import ProductDetails from "../pages/Home/Categories/ProductDetails";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
             {
                 path:'/',
                 element:<Home/>
+            },
+            {
+                path:'/category/product/:name',
+                element:<ProductDetails/>,
+                loader: ({params})=> fetch(`http://localhost:5000/category/${params.name}`)
             },
             {
                 path:'/login',
@@ -39,6 +45,10 @@ export const router = createBrowserRouter([
         element:<Dashboardlayout/>,
         errorElement: <Error/>,
         children: [
+            {
+                path:'/dashboard',
+                element:<Dashboard/>
+            },
             {
                 path:'/dashboard/addProduct',
                 element:<AddProduct/>
