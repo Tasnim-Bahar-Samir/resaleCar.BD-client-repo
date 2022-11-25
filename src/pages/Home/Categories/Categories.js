@@ -12,7 +12,7 @@ const Categories = () => {
     console.log(data)
     const categories = data?.data;
     if(isLoading){
-        <Spinner/>
+       return <Spinner/>
     }
   return (
     <div className='mx-10 mb-16'>
@@ -27,7 +27,7 @@ const Categories = () => {
             <div className="card-body">
                 <p>Category Name:{category.categoryName}</p>
               <div className="card-actions text-left">
-                <button className="btn btn-primary"><Link to={`category/product/${category.categoryName}`}>Visit</Link></button>
+              <Link to={`/category/${category.categoryName}`}><button className="btn btn-primary">Visit</button></Link>
               </div>
             </div>
           </div>)

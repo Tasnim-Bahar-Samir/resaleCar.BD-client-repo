@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import Dashboardlayout from "../Layouts/Dashboardlayout";
 import Main from "../Layouts/Main";
 import Blog from "../pages/Blog/Blog";
@@ -10,6 +11,7 @@ import ProductDetails from "../pages/Home/Categories/ProductDetails";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import ProtectedRoute from "./ProtectedRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -24,9 +26,9 @@ export const router = createBrowserRouter([
                 element:<Home/>
             },
             {
-                path:'/category/product/:name',
-                element:<ProductDetails/>,
-                loader: ({params})=> fetch(`http://localhost:5000/category/${params.name}`)
+                path:'/category/:name',
+                element:<ProtectedRoute><ProductDetails/></ProtectedRoute>,
+                
             },
             {
                 path:'/login',
@@ -38,13 +40,13 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/blog',
-                element: <Blog/>
+                element: <ProtectedRoute><Blog/></ProtectedRoute>
             }
         ]
     },
     {
         path:'/dashboard',
-        element:<Dashboardlayout/>,
+        element:<ProtectedRoute><Dashboardlayout/></ProtectedRoute>,
         errorElement: <Error/>,
         children: [
             {

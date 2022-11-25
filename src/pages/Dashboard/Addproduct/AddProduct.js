@@ -1,7 +1,11 @@
-import React from "react";
+import moment from "moment/moment";
+import React, { useContext } from "react";
 import {toast} from 'react-hot-toast'
+import { authProvider } from "../../../Context/UserContext";
+
 
 const AddProduct = () => {
+  const{user} = useContext(authProvider)
   const handleAddProduct = (e)=>{
     e.preventDefault()
     const form = e.target;
@@ -21,6 +25,7 @@ const AddProduct = () => {
     .then(res => res.json())
     .then(imgData => {
       if(imgData.success){
+        const postingTime = moment().format('MMMM Do YYYY, h:mm:ss a');
         const product = {
           name:form.carName.value,
           image: imgData.data.display_url,
@@ -31,7 +36,9 @@ const AddProduct = () => {
           location: form.location.value,
           phone: form.phone.value,
           useTime: form.useTime.value,
-          description: form.description.value
+          description: form.description.value,
+          postingTime,
+          seller:user.displayName
         }
         fetch(`http://localhost:5000/products`,{
           method:"POST",

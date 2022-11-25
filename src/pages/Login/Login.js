@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 import useToken from "../../Hooks/useToken";
 
 const Login = () => { 
+  const {loading} = useContext(authProvider)
   const {userLogin} = useContext(authProvider)
   const{handleSubmit,register,formState: { errors }} = useForm()
   const location = useLocation()
@@ -14,7 +16,7 @@ const Login = () => {
   const [userEmail,setUserEmail] = useState('')
   const [token] = useToken(userEmail)
   if(token) {
-    navigate(from)
+    navigate(from,{replace:true})
   }
   const onLogin = data=>{
     const {email,password} = data;
@@ -58,7 +60,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">{loading? <Spinner/>:'Login'}</button>
               </div>
             </form>
             <p>New to this website?<Link to='/register'>Register now</Link></p>

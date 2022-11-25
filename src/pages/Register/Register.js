@@ -12,7 +12,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const location = useLocation()
-  const from = location.state?.from?.pathnam || '/'
+  const from = location.state?.from?.pathname || '/'
   const navigate = useNavigate()
   const [userEmail,setUserEmail] = useState('')
   const [token] = useToken(userEmail);

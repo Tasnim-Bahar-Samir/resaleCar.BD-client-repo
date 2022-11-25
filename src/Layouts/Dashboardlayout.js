@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import Navbar from '../Shared/Navbar/Navbar'
 
 const Dashboardlayout = () => {
   return (
     <div>
+    <Navbar/>
         <div className="drawer drawer-mobile drawer-end">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content text-left">
