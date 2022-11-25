@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
+import ConfirmationModal from "../../../Components/ConfirmationModal";
 
 const AllBuyers = () => {
+  const [deletingData, setDeletingData] = useState(null)
   const { data ={} } = useQuery({
     queryKey: [],
     queryFn: () =>
@@ -11,6 +13,24 @@ const AllBuyers = () => {
         }
       }).then((res) => res.json()),
   });
+
+  const handleCloseModal = ()=>{
+    setDeletingData(null)
+  }
+  const handleDeleteBuyer = (seller) =>{
+    console.log(seller)
+    fetch(`http://localhost:5000/users/${seller._id}`,{
+      method:"DELETE",
+      headers:{
+        authorization: localStorage.getItem('resale_token')
+      }
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data)
+    })
+  }
+
   const AllBuyers = data?.data;
   return (
     <div className="m-10">
@@ -31,12 +51,22 @@ const AllBuyers = () => {
             <td>{buyer.name}</td>
             <td>{buyer.email}</td>
             <td>
-              <button className="btn btn-sm btn-warning">Delete</button>
+              <label htmlFor="confirmation-modal" onClick={()=> setDeletingData(buyer)} className="btn btn-sm btn-warning">Delete</label>
             </td>
           </tr>
         ))}
       </tbody>
       </table>
+      {
+        deletingData &&
+        <ConfirmationModal
+      title="Are you sure to delete this user"
+      desc= "If you delete once you wont be able to recover it."
+      data= {deletingData}
+      closeModal = {handleCloseModal}
+      modalAction = {handleDeleteBuyer}
+      />
+      }
     </div>
   );
 };
