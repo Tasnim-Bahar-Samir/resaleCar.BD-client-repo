@@ -5,7 +5,11 @@ const AllSellers = () => {
   const { data } = useQuery({
     queryKey: [],
     queryFn: () =>
-      fetch("http://localhost:5000/users/seller").then((res) => res.json()),
+      fetch("http://localhost:5000/users/seller",{
+        headers: {
+          authorization : localStorage.getItem('resale_token')
+        }
+      }).then((res) => res.json()),
   });
   console.log(data?.data);
   const allSellers = data?.data
