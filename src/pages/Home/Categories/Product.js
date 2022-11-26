@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { authProvider } from "../../../Context/UserContext";
 
 const Product = ({ product,setProduct }) => {
+  const {user} = useContext(authProvider)
+  const navigate = useNavigate()
+
   const { image, name, resalePrice, orginalPrice, description,seller,postingTime,phone,location } = product;
+  const handleOrder = ()=>{
+    user?
+    setProduct(product)
+    :
+    navigate('/login')
+  }
   return (
     <div>
       <div className=" md:flex md:gap-10 border-2 items-center">
@@ -30,7 +41,7 @@ const Product = ({ product,setProduct }) => {
           </div>
           <p>Seller: {seller}</p>
           <div className="card-actions w-full justify-end">
-            <label htmlFor="order-modal" onClick={()=>setProduct(product)} className="btn btn-primary">Proceed Order</label>
+            <label htmlFor="order-modal"  onClick= {handleOrder} className="btn btn-primary">Proceed Order</label>
           </div>
         </div>
       </div>

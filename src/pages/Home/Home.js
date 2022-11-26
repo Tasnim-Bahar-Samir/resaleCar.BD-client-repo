@@ -1,4 +1,5 @@
 import React from 'react'
+import AdvertisedProducts from './AdvertisedProducts/AdvertisedProducts'
 import Categories from './Categories/Categories'
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       Home
       <Categories/>
+      <AdvertisedProducts/>
     </div>
     
   )
