@@ -42,7 +42,6 @@ const OrderModal = ({product,setProduct}) => {
     <div className="modal">
       <div className="modal-box relative">
         <label htmlFor="order-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        {/* <h3 className="text-lg font-bold">Congratulations random Internet user!</h3> */}
         <form onSubmit={handleOrder} className="grid grid-cols-1 gap-5 mt-11">
             <input
               type="text"

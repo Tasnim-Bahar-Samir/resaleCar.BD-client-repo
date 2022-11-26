@@ -10,6 +10,7 @@ import Error from "../pages/Error/Error";
 import ProductDetails from "../pages/Home/Categories/ProductDetails";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import MyProduts from "../pages/MyProducts/MyProduts";
 import Register from "../pages/Register/Register";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/allBuyers',
                 element:<AllBuyers/>
+            },
+            {
+                path:'/dashboard/myProducts',
+                element:<MyProduts/>
             },
         ]
     }

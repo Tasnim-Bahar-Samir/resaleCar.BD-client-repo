@@ -38,7 +38,8 @@ const AddProduct = () => {
           useTime: form.useTime.value,
           description: form.description.value,
           postingTime,
-          seller:user.displayName
+          seller:user.displayName,
+          email: user.email
         }
         fetch(`http://localhost:5000/products`,{
           method:"POST",

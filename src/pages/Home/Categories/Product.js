@@ -21,7 +21,7 @@ const Product = ({ product,setProduct }) => {
           </h5>
           <h5>
             Resale Price:
-            <span className="text-md font-semibold">TK {resalePrice}</span>
+            <span className="text-md font-semibold text-green-700">TK {resalePrice}</span>
           </h5>
           <p className="text-left my-1">{description}</p>
           <div>
