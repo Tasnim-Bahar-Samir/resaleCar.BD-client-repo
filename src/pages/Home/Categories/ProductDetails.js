@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLoaderData, useNavigation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OrderModal from '../../../Components/OrderModal';
+import ReportModal from '../../../Components/ReportModal';
 import Spinner from '../../../Components/Spinner';
 import Product from './Product';
 
@@ -17,6 +18,7 @@ const ProductDetails = () => {
         })
 
     },[name])
+    
 
     console.log(products)
 
@@ -32,6 +34,10 @@ const ProductDetails = () => {
         {
             product && 
             <OrderModal product = {product} setProduct= {setProduct}/>
+        }
+        {
+            product && 
+            <ReportModal setProduct={setProduct} product = {product}/>
         }
     </div>
   )

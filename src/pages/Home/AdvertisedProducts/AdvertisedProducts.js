@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import OrderModal from '../../../Components/OrderModal'
+import ReportModal from '../../../Components/ReportModal'
 import Product from '../Categories/Product'
 
 const AdvertisedProducts = () => {
@@ -32,6 +33,10 @@ const AdvertisedProducts = () => {
         {
             product && 
             <OrderModal product = {product} setProduct= {setProduct}/>
+        },
+        {
+            product &&
+            <ReportModal setProduct={setProduct}  product = {product}/>
         }
     </>
   )

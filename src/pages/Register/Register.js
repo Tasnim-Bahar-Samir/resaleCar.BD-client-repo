@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 import useToken from "../../Hooks/useToken";
 
 const Register = () => {
-  const{user,createUser,updateUser} = useContext(authProvider)
+  const{loading,createUser,updateUser} = useContext(authProvider)
   const {
     register,
     handleSubmit,
@@ -119,7 +120,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn btn-primary">{loading? <Spinner/>: 'Register'}</button>
               </div>
             </form>
             <p>

@@ -33,8 +33,10 @@ const AllBuyers = () => {
 
   const AllBuyers = data?.data;
   return (
-    <div className="m-10">
-      <h2>All buyers</h2>
+    <div className="md:mx-20"
+    >
+      <h2 className="text-4xl text-center font-semibold my-5">All buyers</h2>
+      <div className=" border-2 rounded-md bg-slate-100 p-2">
       <table className="table w-full">
       <thead>
         <tr>
@@ -51,12 +53,13 @@ const AllBuyers = () => {
             <td>{buyer.name}</td>
             <td>{buyer.email}</td>
             <td>
-              <label htmlFor="confirmation-modal" onClick={()=> setDeletingData(buyer)} className="btn btn-sm btn-warning">Delete</label>
+              <label htmlFor="confirmation-modal" onClick={()=> setDeletingData(buyer)} className="btn btn-sm btn-error">Delete</label>
             </td>
           </tr>
         ))}
       </tbody>
       </table>
+      </div>
       {
         deletingData &&
         <ConfirmationModal

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ConfirmationModal from "../../../Components/ConfirmationModal";
+import toast from "react-hot-toast";
 
 const AllSellers = () => {
   const [deletingData, setDeletingData] = useState(null)
   console.log(deletingData)
-  const { data } = useQuery({
+  const { data,refetch } = useQuery({
     queryKey: [],
     queryFn: () =>
       fetch("http://localhost:5000/users/seller",{
@@ -15,6 +16,24 @@ const AllSellers = () => {
       }).then((res) => res.json())
   });
 
+//verifying seller by admin
+  const handleVerify = (id)=> {
+    fetch(`http://localhost:5000/user/verified/${id}`,{
+      method: 'PUT',
+      headers:{
+        authorization: localStorage.getItem('resale_token')
+      }
+    })
+    .then(res => res.json())
+    .then(data=>{
+      console.log(data)
+      if(data.success){
+        refetch()
+      }
+    })
+  }
+
+//code for deleting seller
   const handleDelete = (seller) =>{
     console.log(seller)
     fetch(`http://localhost:5000/users/${seller._id}`,{
@@ -26,6 +45,10 @@ const AllSellers = () => {
     .then(res => res.json())
     .then(data =>{
       console.log(data)
+      if(data.success){
+        toast.success(data.message)
+        refetch()
+      }
     })
   }
 
@@ -36,9 +59,9 @@ const AllSellers = () => {
   // console.log(data?.data);
   const allSellers = data?.data
   return (
-    <div>
-      <h3>All Sellers</h3>
-      <div className="overflow-x-auto">
+    <div className="md:mx-20">
+      <h3 className="text-4xl text-center font-semibold my-5">All Sellers</h3>
+      <div className="overflow-x-auto border-2 rounded-md bg-slate-100 p-2">
         <table className="table w-full">
           <thead>
             <tr>
@@ -55,8 +78,8 @@ const AllSellers = () => {
                 <th>{index+1}</th>
                 <td>{seller.name}</td>
                 <td>{seller.email}</td>
-                <td><button className="btn btn-sm">Verify</button></td>
-                <td><label onClick={() => setDeletingData(seller)} htmlFor="confirmation-modal" className="btn btn-sm btn-warning">Delete</label></td>
+                <td>{seller.status? seller.status: <button onClick={()=> handleVerify(seller._id)} className="btn btn-sm">Verify</button>}</td>
+                <td><label onClick={() => setDeletingData(seller)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
               </tr>
             ))}
           </tbody>
