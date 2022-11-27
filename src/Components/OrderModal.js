@@ -21,7 +21,7 @@ const OrderModal = ({product,setProduct}) => {
             location: form.location.value,
         }
         console.log(order)
-        fetch('http://localhost:5000/orders',{
+        fetch('https://assignment-12-server-side-kohl.vercel.app/orders',{
             method:"POST",
             headers:{
                 'content-type' : 'application/json',

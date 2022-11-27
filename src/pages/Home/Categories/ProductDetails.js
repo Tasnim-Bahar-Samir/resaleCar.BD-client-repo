@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import OrderModal from '../../../Components/OrderModal';
 import ReportModal from '../../../Components/ReportModal';
+import Spinner from '../../../Components/Spinner';
 import { authProvider } from '../../../Context/UserContext';
 import Product from './Product';
 
@@ -11,9 +12,11 @@ const ProductDetails = () => {
     const{name} = useParams()
     const [products,setProducts] = useState([])
     const [product , setProduct] = useState(null)
+    const [loading,setLoading] = useState(false)
     console.log(products)
     useEffect(()=>{
-        fetch(`http://localhost:5000/category/${name}`,{
+        setLoading(true)
+        fetch(`https://assignment-12-server-side-kohl.vercel.app/category/${name}`,{
             headers:{
                 authorization : localStorage.getItem('resale_token')
             }
@@ -21,10 +24,14 @@ const ProductDetails = () => {
         .then(res => res.json())
         .then(data => {
             setProducts(data.data)
+            setLoading(false)
         })
 
     },[name])
 
+    if(loading){
+       return <div className='h-96 flex items-center justify-center'><Spinner/></div>
+    }
 
     console.log(products)
     if(products?.length === 0){

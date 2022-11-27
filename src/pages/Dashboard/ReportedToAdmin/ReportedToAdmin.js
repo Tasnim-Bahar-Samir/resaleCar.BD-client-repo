@@ -7,7 +7,7 @@ const ReportedToAdmin = () => {
     const [deletingData, setDeletingData] = useState(null)
     const{data,refetch} = useQuery({ 
         queryKey:[],
-        queryFn: ()=> fetch('http://localhost:5000/product/reported',{
+        queryFn: ()=> fetch('https://assignment-12-server-side-kohl.vercel.app/product/reported',{
             headers:{
                 authorization: localStorage.getItem('resale_token')
               }
@@ -22,7 +22,7 @@ const ReportedToAdmin = () => {
 
     const handleDelete = (product)=>{
         console.log(product)
-        fetch(`http://localhost:5000/product/${product._id}`,{
+        fetch(`https://assignment-12-server-side-kohl.vercel.app/product/${product._id}`,{
             method:"DELETE",
             headers:{
                 authorization: localStorage.getItem('resale_token')

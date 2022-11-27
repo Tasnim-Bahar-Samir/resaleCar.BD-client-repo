@@ -12,7 +12,7 @@ const AddProduct = () => {
 
   const{data} = useQuery({
     queryKey:[],
-    queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`,{
+    queryFn:()=>fetch(`https://assignment-12-server-side-kohl.vercel.app/users?email=${user.email}`,{
       headers:{
         authorization : localStorage.getItem('resale_token')
       }
@@ -62,7 +62,7 @@ console.log(seller?.status)
             status: seller?.status,
           }
         }
-        fetch(`http://localhost:5000/products`,{
+        fetch(`https://assignment-12-server-side-kohl.vercel.app/products`,{
           method:"POST",
           headers:{
             'content-type' : 'application/json',

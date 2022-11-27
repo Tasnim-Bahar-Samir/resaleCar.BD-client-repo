@@ -9,7 +9,7 @@ const AllSellers = () => {
   const { data,refetch } = useQuery({
     queryKey: [],
     queryFn: () =>
-      fetch("http://localhost:5000/users/seller",{
+      fetch("https://assignment-12-server-side-kohl.vercel.app/users/seller",{
         headers: {
           authorization : localStorage.getItem('resale_token')
         }
@@ -18,7 +18,7 @@ const AllSellers = () => {
 console.log(data)
 //verifying seller by admin
   const handleVerify = (id)=> {
-    fetch(`http://localhost:5000/user/verified/${id}`,{
+    fetch(`https://assignment-12-server-side-kohl.vercel.app/user/verified/${id}`,{
       method: 'PUT',
       headers:{
         authorization: localStorage.getItem('resale_token')
@@ -36,7 +36,7 @@ console.log(data)
 //code for deleting seller
   const handleDelete = (seller) =>{
     console.log(seller)
-    fetch(`http://localhost:5000/users/${seller._id}`,{
+    fetch(`https://assignment-12-server-side-kohl.vercel.app/users/${seller._id}`,{
       method:"DELETE",
       headers:{
         authorization: localStorage.getItem('resale_token')

@@ -28,7 +28,7 @@ const GoogleLogin = () => {
 
     const saveUserToDb = (name,email,role,image)=>{
         const user = {name,email,role,image}
-        fetch('http://localhost:5000/users',{
+        fetch('https://assignment-12-server-side-kohl.vercel.app/users',{
           method:'POST',
           headers:{
             'content-type':'application/json'

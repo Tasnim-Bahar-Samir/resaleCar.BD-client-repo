@@ -9,7 +9,7 @@ const MyOrders = () => {
   const { data,isLoading } = useQuery({
     queryKey: [],
     queryFn: () =>
-      fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+      fetch(`https://assignment-12-server-side-kohl.vercel.app/orders?email=${user?.email}`, {
         headers: {
           authorization: localStorage.getItem("resale_token"),
         },

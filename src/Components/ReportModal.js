@@ -12,7 +12,7 @@ const ReportModal = ({ product,setProduct }) => {
             reportMessage,
             reportedBy: user?.email
         }
-    fetch(`http://localhost:5000/product/report/${product._id}`,{
+    fetch(`https://assignment-12-server-side-kohl.vercel.app/product/report/${product._id}`,{
         method: "PUT",
         headers:{
             'content-type':'application/json',

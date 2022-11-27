@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
                 element:<Register/>
             },
             {
-                path:'/blog',
+                path:'/blogs',
                 element: <Blog/>
             }
         ]
@@ -87,7 +87,7 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 element: <Payment/>,
-                loader: ({params})=> fetch(`http://localhost:5000/orders/${params.id}`)
+                loader: ({params})=> fetch(`https://assignment-12-server-side-kohl.vercel.app/orders/${params.id}`)
             }
         ]
     }

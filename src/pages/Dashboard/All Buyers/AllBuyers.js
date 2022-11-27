@@ -7,7 +7,7 @@ const AllBuyers = () => {
   const { data ={},refetch } = useQuery({
     queryKey: [],
     queryFn: () =>
-      fetch("http://localhost:5000/users/buyer",{
+      fetch("https://assignment-12-server-side-kohl.vercel.app/users/buyer",{
         headers: {
           authorization : localStorage.getItem('resale_token')
         }
@@ -19,7 +19,7 @@ const AllBuyers = () => {
   }
   const handleDeleteBuyer = (seller) =>{
     console.log(seller)
-    fetch(`http://localhost:5000/users/${seller._id}`,{
+    fetch(`https://assignment-12-server-side-kohl.vercel.app/users/${seller._id}`,{
       method:"DELETE",
       headers:{
         authorization: localStorage.getItem('resale_token')

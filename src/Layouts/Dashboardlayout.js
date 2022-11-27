@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Outlet } from "react-router-dom";
 import { authProvider } from "../Context/UserContext";
 import useRole from "../Hooks/useRole";
@@ -13,6 +14,7 @@ const Dashboardlayout = () => {
       <div className="drawer drawer-mobile drawer-end">
         <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content text-left">
+        <label htmlFor="dashboard-drawer" className="flex justify-end drawer-button lg:hidden mr-5"><GiHamburgerMenu/></label>
           <Outlet />
         </div>
         <div className="drawer-side">

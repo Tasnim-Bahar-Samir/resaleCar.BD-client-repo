@@ -9,7 +9,7 @@ const MyProduts = () => {
     const {user} = useContext(authProvider);
     const {data, refetch} = useQuery({
         queryKey: [user?.email],
-        queryFn:()=> fetch(`http://localhost:5000/myProducts?email=${user?.email}`,{
+        queryFn:()=> fetch(`https://assignment-12-server-side-kohl.vercel.app/myProducts?email=${user?.email}`,{
             headers:{
                 authorization: localStorage.getItem('resale_token')
             }
@@ -19,7 +19,7 @@ const MyProduts = () => {
     console.log(data)
 
     const handleAdvertise = (product)=>{
-      fetch(`http://localhost:5000/product/advertise/${product._id}`,{
+      fetch(`https://assignment-12-server-side-kohl.vercel.app/product/advertise/${product._id}`,{
         method:"PUT",
         headers:{
           authorization: localStorage.getItem('resale_token')
@@ -38,7 +38,7 @@ const MyProduts = () => {
 
     const handleDelete = (product)=>{
       console.log(product)
-      fetch(`http://localhost:5000/product/${product._id}`,{
+      fetch(`https://assignment-12-server-side-kohl.vercel.app/product/${product._id}`,{
         method:"DELETE",
         headers:{
           authorization : localStorage.getItem('resale_token')

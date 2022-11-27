@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authProvider } from "../../Context/UserContext";
-import {GiHamburgerMenu} from "react-icons/gi"
-import logo1 from '../../assets/images/bannerImg.png'
+import logo from '../../assets/images/logo.jpg'
 
 const Navbar = () => {
   const {user,userLogout} = useContext(authProvider)
@@ -16,7 +15,7 @@ const Navbar = () => {
   }
     const menuItem = <>
         <li><NavLink className='ml-5 rounded-md' to='/'>Home</NavLink></li>
-        <li><NavLink className='ml-5 rounded-md' to='/blog'>Blog</NavLink></li>
+        <li><NavLink className='ml-5 rounded-md' to='/blogs'>Blogs</NavLink></li>
         
         {
           user?.uid ?
@@ -58,8 +57,7 @@ const Navbar = () => {
               }
             </ul>
           </div>
-          <Link className="flex items-center" to='/'><img className="w-10" src={logo1} alt="" />
-          <a to='/' className="btn btn-ghost normal-case text-xl text-blue-500">ResaleCar.Bd</a></Link>
+          <Link to='/' className="btn btn-ghost normal-case text-xl text-blue-500">ResaleCar.Bd</Link>
         </div>
         <div className="navbar-center hidden lg:flex ml-auto">
           <ul className="menu menu-horizontal p-0">
@@ -68,9 +66,6 @@ const Navbar = () => {
            }
           </ul>
         </div>
-        <label htmlFor="dashboard-drawer" tabIndex={1} className="btn btn-ghost lg:hidden ml-auto">
-              <GiHamburgerMenu/>
-            </label>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const CheckoutForm = ({order}) => {
   const elements = useElements();
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://assignment-12-server-side-kohl.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price }),
@@ -69,7 +69,7 @@ const CheckoutForm = ({order}) => {
           orderId: _id,
           transactionId: paymentIntent.id
         }
-        fetch("http://localhost:5000/payments",{
+        fetch("https://assignment-12-server-side-kohl.vercel.app/payments",{
         method: "POST",
         headers: {
             'content-type':'application/json',

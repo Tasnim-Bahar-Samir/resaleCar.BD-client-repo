@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
 const Spinner = () => {
   return (
-    <div>
-      <div className = "flex justify-center items-center">
-    <div className = "spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-      {/* <span className = "visually-hidden">Loading...</span> */}
+    <div className="text-blue-600">
+      <div
+      className=" border-dashed animate-spin font-bold w-8 h-8 border-4 rounded-full text-black
+  "
+    >
     </div>
-  </div>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Spinner
+export default Spinner;
