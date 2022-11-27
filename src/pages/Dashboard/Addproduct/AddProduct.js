@@ -1,11 +1,27 @@
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment/moment";
 import React, { useContext } from "react";
 import {toast} from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
 import { authProvider } from "../../../Context/UserContext";
 
 
 const AddProduct = () => {
-  const{user} = useContext(authProvider)
+  const {user} = useContext(authProvider)
+  const navigate = useNavigate()
+
+  const{data} = useQuery({
+    queryKey:[],
+    queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`,{
+      headers:{
+        authorization : localStorage.getItem('resale_token')
+      }
+    })
+    .then(res => res.json())
+})
+const seller = data?.data;
+console.log(seller?.status)
+
   const handleAddProduct = (e)=>{
     e.preventDefault()
     const form = e.target;
@@ -27,6 +43,7 @@ const AddProduct = () => {
       if(imgData.success){
         const postingTime = moment().format('MMMM Do YYYY, h:mm:ss a');
         const product = {
+          status:'available',
           name:form.carName.value,
           image: imgData.data.display_url,
           orginalPrice:form.orginalPrice.value,
@@ -38,8 +55,12 @@ const AddProduct = () => {
           useTime: form.useTime.value,
           description: form.description.value,
           postingTime,
-          seller:user.displayName,
-          email: user.email
+          email:user?.email,
+          seller:{
+            image:seller?.image,
+            name:seller?.name,
+            status: seller?.status,
+          }
         }
         fetch(`http://localhost:5000/products`,{
           method:"POST",
@@ -52,6 +73,7 @@ const AddProduct = () => {
         .then(res => res.json())
         .then(data=>{
           if(data.success){
+            navigate('/dashboard/myProducts')
             toast.success(data.message)
             form.reset()
           }

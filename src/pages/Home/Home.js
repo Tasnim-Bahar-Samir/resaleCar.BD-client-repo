@@ -1,13 +1,15 @@
 import React from 'react'
 import AdvertisedProducts from './AdvertisedProducts/AdvertisedProducts'
+import Banner from './Banner/Banner'
 import Categories from './Categories/Categories'
 
 const Home = () => {
   return (
     <div>
-      Home
+      <Banner/>
       <Categories/>
       <AdvertisedProducts/>
+
     </div>
     
   )

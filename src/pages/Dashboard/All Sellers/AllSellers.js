@@ -15,7 +15,7 @@ const AllSellers = () => {
         }
       }).then((res) => res.json())
   });
-
+console.log(data)
 //verifying seller by admin
   const handleVerify = (id)=> {
     fetch(`http://localhost:5000/user/verified/${id}`,{
@@ -32,7 +32,7 @@ const AllSellers = () => {
       }
     })
   }
-
+  const allSellers = data?.data
 //code for deleting seller
   const handleDelete = (seller) =>{
     console.log(seller)
@@ -55,9 +55,7 @@ const AllSellers = () => {
   const handleCloseModal = ()=>{
     setDeletingData(null)
   }
-
-  // console.log(data?.data);
-  const allSellers = data?.data
+  
   return (
     <div className="md:mx-20">
       <h3 className="text-4xl text-center font-semibold my-5">All Sellers</h3>

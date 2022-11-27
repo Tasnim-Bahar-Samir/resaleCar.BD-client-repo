@@ -16,6 +16,8 @@ const MyProduts = () => {
         }).then(res => res.json())
     })
 
+    console.log(data)
+
     const handleAdvertise = (product)=>{
       fetch(`http://localhost:5000/product/advertise/${product._id}`,{
         method:"PUT",
@@ -27,6 +29,7 @@ const MyProduts = () => {
       .then(data => {
         if(data.success){
           toast.success(data.message)
+          refetch()
         }else{
           toast.error(data.message)
         }
@@ -54,22 +57,22 @@ const MyProduts = () => {
     }
 
     const products = data?.data;
-
+console.log(products)
     if(products?.length === 0){
       return <div className="md:m-20 m-10"><p className="text-xl font-semibold">You have not published any product to show.</p></div>
     }
 
   return (
-    <div className='m-10'>
+    <div className='m-10 md:flex gap-3'>
         {
-            products?.map(product => <div key={product._id} className="card w-96 bg-base-100 shadow-xl text-left">
+            products?.map(product => <div key={product._id} className="card w-96 bg-base-100 shadow-xl text-left mb-3">
             <figure className="px-10 pt-10">
               <img src={product.image} alt="Shoes" className="rounded-xl w-full" />
             </figure>
             <div className="card-body  text-left">
               <div className='flex justify-between w-full'>
               <h2 className="card-title">{product.name}</h2>
-              <h4 className={`text-lg text-green-700 font-semibold`}>{product?.sold ? 'Sold':'Available'}</h4>
+              <h4 className={`text-lg text-green-700 font-semibold`}>{product?.status}</h4>
               </div>
               <p className='text-left'>Price: <span className='text-md font-semibold'>TK {product.resalePrice}</span></p>
               <div className="card-actions flex justify-between">

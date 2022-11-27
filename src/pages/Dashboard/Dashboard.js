@@ -2,7 +2,9 @@ import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <h2 className='text-center text-5xl my-5'>Welcome to dashboard</h2>
+    </div>
   )
 }
 

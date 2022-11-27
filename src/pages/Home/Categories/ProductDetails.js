@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import OrderModal from '../../../Components/OrderModal';
 import ReportModal from '../../../Components/ReportModal';
+import { authProvider } from '../../../Context/UserContext';
 import Product from './Product';
 
 const ProductDetails = () => {
+    const {user} = useContext(authProvider)
     const{name} = useParams()
     const [products,setProducts] = useState([])
     const [product , setProduct] = useState(null)
     console.log(products)
     useEffect(()=>{
-        fetch(`http://localhost:5000/category/${name}`)
+        fetch(`http://localhost:5000/category/${name}`,{
+            headers:{
+                authorization : localStorage.getItem('resale_token')
+            }
+        })
         .then(res => res.json())
         .then(data => {
             setProducts(data.data)
         })
 
     },[name])
-    
+
 
     console.log(products)
     if(products?.length === 0){
@@ -27,6 +34,7 @@ const ProductDetails = () => {
     return (
     <div>
         <div className='md:mx-24 mx-4 min-h-screen mt-9'>
+        <h2 className="text-2xl text-center font-semibold my-5">Available car in this category</h2>
         {
             products?.map(product => <Product product = {product} key={product._id} setProduct = {setProduct}/>)
         }

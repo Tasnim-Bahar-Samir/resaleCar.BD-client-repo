@@ -1,21 +1,22 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authProvider } from "../../../Context/UserContext";
+import{GoVerified} from "react-icons/go"
 
 const Product = ({ product, setProduct }) => {
   const { user } = useContext(authProvider);
   const navigate = useNavigate();
-
+  
   const {
     image,
     name,
     resalePrice,
     orginalPrice,
     description,
-    seller,
     postingTime,
     phone,
     location,
+    seller
   } = product;
   const handleOrder = () => {
     user ? setProduct(product) : navigate("/login");
@@ -25,8 +26,7 @@ const Product = ({ product, setProduct }) => {
   };
   return (
     <div>
-      <h2 className="text-2xl text-center font-semibold my-5">Available car in {name} category</h2>
-      <div className=" md:flex md:gap-10 border-2 items-center">
+      <div className=" md:flex md:gap-10 border-2 items-center mb-2">
         <div className="">
           <img
             src={image}
@@ -36,7 +36,7 @@ const Product = ({ product, setProduct }) => {
         </div>
         <div className=" text-left p-3 w-full">
           <div className="flex justify-between">
-            <div className="flex md:gap-8 my-1">
+            <div className="md:flex md:gap-8 my-1">
               <h2 className="card-title">{name}</h2>
               <p>{postingTime}</p>
             </div>
@@ -58,14 +58,14 @@ const Product = ({ product, setProduct }) => {
             </span>
           </h5>
           </div>
-          <p className="text-left my-1">About Procut: {description}</p>
-          <p className="my-1">Seller: {seller}</p>
+          <p className="text-left my-1 text-lg">About Procut: {description}</p>
+          <p className="my-1 flex gap-2 items-center">Seller: {seller?.name} <span>{seller?.status && <GoVerified className="text-blue-700"/>}</span></p>
           <div>
             <p>Phone: {phone}</p>
             <p>Location: {location}</p>
           </div>
           
-          <div className="card-actions w-full justify-end">
+          <div className="card-actions w-full justify-end my-2">
             <label
               htmlFor="order-modal"
               onClick={handleOrder}

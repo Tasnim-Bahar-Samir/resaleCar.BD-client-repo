@@ -4,11 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 import useToken from "../../Hooks/useToken";
+import GoogleLogin from "../../Shared/SocialLogin/GoogleLogin";
 
 const Login = () => { 
-  const {loading} = useContext(authProvider)
-  const {userLogin} = useContext(authProvider)
+  const {loading,setLoading,userLogin} = useContext(authProvider)
   const{handleSubmit,register,formState: { errors }} = useForm()
+  const [error,setError] = useState('')
   const location = useLocation()
   const from = location.state?.from?.pathname || '/';
   const navigate = useNavigate()
@@ -25,14 +26,18 @@ const Login = () => {
     .then(()=>{
       setUserEmail(email)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      setError('Invalid email or password')
+      setLoading(false)
+    })
   }
   return (
     <div>
       <div className="hero my-20">
         <div className="hero-content text-left">
           <div className="card w-[400px] shadow-2xl border-2 p-10">
-          <h1 className="text-2xl mt-5 mx-5">Login now</h1>
+          <h1 className="text-2xl my-5 mx-5">Login now</h1>
             <form onSubmit={handleSubmit(onLogin)} className="">
             
               <div className="form-control">
@@ -61,10 +66,12 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">{loading? <Spinner/>:'Login'}</button>
+              {error && <p className="text-red-700 text-lg">{error}</p> }
               </div>
             </form>
-            <p>New to this website?<Link to='/register'>Register now</Link></p>
+            <p>New to this website?<Link className=" underline" to='/register'>Register now</Link></p>
             <div className="divider">OR</div>
+            <GoogleLogin/>
           </div>
         </div>
       </div>

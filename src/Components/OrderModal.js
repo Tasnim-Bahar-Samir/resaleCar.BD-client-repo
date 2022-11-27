@@ -11,7 +11,7 @@ const OrderModal = ({product,setProduct}) => {
         e.preventDefault()
         const form = e.target;
         const order = {
-            producId:product._id,
+            productId:product._id,
             productImage:product.image,
             productName: product.name,
             price: product.resalePrice,
@@ -20,6 +20,7 @@ const OrderModal = ({product,setProduct}) => {
             buyerPhone: form.phone.value,
             location: form.location.value,
         }
+        console.log(order)
         fetch('http://localhost:5000/orders',{
             method:"POST",
             headers:{
@@ -39,8 +40,9 @@ const OrderModal = ({product,setProduct}) => {
                 toast.error(data.message)
             }
         })
-        console.log(order)
+        
     }
+    console.log(product)
   return (
     <div>
     <input type="checkbox" id="order-modal" className="modal-toggle" />

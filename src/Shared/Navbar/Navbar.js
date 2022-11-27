@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authProvider } from "../../Context/UserContext";
+import {GiHamburgerMenu} from "react-icons/gi"
+import logo1 from '../../assets/images/bannerImg.png'
 
 const Navbar = () => {
   const {user,userLogout} = useContext(authProvider)
@@ -13,20 +15,22 @@ const Navbar = () => {
   .catch(err => console.error(err))
   }
     const menuItem = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
+        <li><NavLink className='ml-5 rounded-md' to='/'>Home</NavLink></li>
+        <li><NavLink className='ml-5 rounded-md' to='/blog'>Blog</NavLink></li>
+        
         {
           user?.uid ?
-          <li onClick={handleLogout}><Link>Logout</Link></li>
+          <>
+            <li><NavLink className='ml-5 rounded-md' to='/dashboard'>Dashboard</NavLink></li>
+          <li onClick={handleLogout}><Link className='border-4 rounded-md border-blue-500 ml-5 text-blue-500'>Logout</Link></li>
+          </>
           :
-          <li><Link to='/login'>Login</Link></li>
+          <li><Link className="border-4 text-blue-500 rounded-md border-blue-500 ml-5" to='/login'>Login</Link></li>
         }
     </>
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-slate-100 shadow-lg mb-3 md:px-14">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -54,16 +58,19 @@ const Navbar = () => {
               }
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <Link className="flex items-center" to='/'><img className="w-10" src={logo1} alt="" />
+          <a to='/' className="btn btn-ghost normal-case text-xl text-blue-500">ResaleCar.Bd</a></Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex ml-auto">
           <ul className="menu menu-horizontal p-0">
            {
             menuItem
            }
           </ul>
         </div>
-        
+        <label htmlFor="dashboard-drawer" tabIndex={1} className="btn btn-ghost lg:hidden ml-auto">
+              <GiHamburgerMenu/>
+            </label>
       </div>
     </div>
   );

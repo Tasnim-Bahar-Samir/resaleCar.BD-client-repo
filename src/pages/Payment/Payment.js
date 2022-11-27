@@ -9,11 +9,13 @@ const Payment = () => {
     const {data} = useLoaderData()
   return (
 
-    <div className='m-5 md:m-10'>
-        <h2>Payment for - {data.productName}</h2>
+    <div className='flex h-[500px] items-center justify-center'>
+      <div className='m-5 md:m-10 '>
+        <h2 className='text-xl font-semibold mb-2'>Payment for - {data.productName}</h2>
         <Elements stripe={stripePromise}>
           <CheckoutForm order = {data}/>
         </Elements>
+    </div>
     </div>
   )
 }

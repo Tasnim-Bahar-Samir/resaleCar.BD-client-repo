@@ -1,17 +1,17 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const CheckoutForm = ({order}) => {
+  const navigate = useNavigate()
   const {buyerName,buyerEmail,price,_id,productId} = order;
   const [cardError,setCardError] = useState('')
-  const [successMessage,setSuccessMessage] = useState('')
   const [clientSecret,setClientSecret] = useState('')
 
   const stripe = useStripe();
   const elements = useElements();
-
-  
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -41,13 +41,10 @@ const CheckoutForm = ({order}) => {
     });
 
     if(error){
-      console.log(error.message)
       setCardError(error.message)
     }else{
       setCardError('')
     }
-
-    setSuccessMessage('')
 
     const { paymentIntent, error: confirmationError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -83,7 +80,8 @@ const CheckoutForm = ({order}) => {
       .then(res => res.json())
       .then(data => {
         if(data.success) {
-          setSuccessMessage("Your payment completed successfuly")
+          toast.success("Your payment completed successfuly")
+          navigate('/dashboard/myOrders')
         }
       })
       }
@@ -91,7 +89,7 @@ const CheckoutForm = ({order}) => {
 
   return (
    <>
-     <form onSubmit={handleSubmit}>
+     <form  className='w-96 shadow-xl p-10' onSubmit={handleSubmit}>
       <CardElement
         options={{
           style: {
@@ -108,16 +106,14 @@ const CheckoutForm = ({order}) => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
+      <button className='btn btn-md btn-success my-5' type="submit" disabled={!stripe}>
         Pay
       </button>
     </form>
     {
       cardError && <p className='text-red-600'>{cardError}</p>
     }
-    {
-       successMessage && <p>{successMessage}</p>
-    }
+    
    </>
 
   )

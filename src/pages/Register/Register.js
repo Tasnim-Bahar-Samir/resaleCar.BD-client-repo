@@ -4,9 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 import useToken from "../../Hooks/useToken";
+import GoogleLogin from "../../Shared/SocialLogin/GoogleLogin";
 
 const Register = () => {
-  const{loading,createUser,updateUser} = useContext(authProvider)
+  const{loading,setLoading,createUser,updateUser} = useContext(authProvider)
   const {
     register,
     handleSubmit,
@@ -22,7 +23,7 @@ const Register = () => {
   }
   const onRegister = (data) => {
     console.log(data);
-    const {name,email,password,mode} = data;
+    const {name,email,password,role} = data;
     console.log(name,email,password)
     createUser(email,password)
         .then(result => {
@@ -33,12 +34,12 @@ const Register = () => {
           updateUser(userInfo)
           .then(() =>{})
           .catch(err => console.error(err))
-          saveUserToDb(name,email,mode)
+          saveUserToDb(name,email,role)
         } )
         .catch(err => console.error(err))
   };
-  const saveUserToDb = (name,email,mode)=>{
-    const user = {name,email,mode}
+  const saveUserToDb = (name,email,role)=>{
+    const user = {name,email,role}
     fetch('http://localhost:5000/users',{
       method:'POST',
       headers:{
@@ -56,9 +57,9 @@ const Register = () => {
     <div>
       <div className="hero my-20">
         <div className="hero-content text-left">
-          <div className="card w-[400px] shadow-2xl border-2">
+          <div className="card w-[400px] shadow-2xl border-2 p-10">
             <h1 className="text-2xl mt-5 mx-5">Register</h1>
-            <form onSubmit={handleSubmit(onRegister)} className="card-body">
+            <form onSubmit={handleSubmit(onRegister)} >
               <div className="form-control">
                 <input
                   {...register("name", {
@@ -107,11 +108,11 @@ const Register = () => {
                 )}
 
                 <div className="mt-3">
-                  <p>Please select your account mode!</p>
+                  <p>Please select your account role!</p>
                   <select
-                  {...register('mode')}
+                  {...register('role')}
                     className="w-full input-bordered input "
-                    name="mode"
+                    name="role"
                     id=""
                   >
                     <option value="buyer">Buyer</option>
@@ -126,6 +127,7 @@ const Register = () => {
             <p>
               Already have an account?<Link to="/register">Login now</Link>
             </p>
+            <GoogleLogin/>
           </div>
         </div>
       </div>

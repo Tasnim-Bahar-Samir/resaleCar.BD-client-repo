@@ -7,7 +7,11 @@ const ReportedToAdmin = () => {
     const [deletingData, setDeletingData] = useState(null)
     const{data,refetch} = useQuery({ 
         queryKey:[],
-        queryFn: ()=> fetch('http://localhost:5000/product/reported').then(res => res.json())
+        queryFn: ()=> fetch('http://localhost:5000/product/reported',{
+            headers:{
+                authorization: localStorage.getItem('resale_token')
+              }
+        }).then(res => res.json())
     })
 
 
@@ -28,6 +32,7 @@ const ReportedToAdmin = () => {
         .then(data => {
             console.log(data)
             if(data.success){
+                setDeletingData(null)
                 toast.success(data.message)
                 refetch()
             }
@@ -35,6 +40,10 @@ const ReportedToAdmin = () => {
     }
 
     const reportedProducts = data?.data;
+
+    if(reportedProducts?.length === 0){
+        return <div className="md:m-20 m-10"><p className="text-xl font-semibold">You have not published any product to show.</p></div>
+      }
   return (
     <div className='m-10'>
       <div className='grid md:grid-cols-2 gap-5'>
