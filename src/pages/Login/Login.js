@@ -31,9 +31,9 @@ const Login = () => {
     <div>
       <div className="hero my-20">
         <div className="hero-content text-left">
-          <div className="card w-[400px] shadow-2xl border-2">
+          <div className="card w-[400px] shadow-2xl border-2 p-10">
           <h1 className="text-2xl mt-5 mx-5">Login now</h1>
-            <form onSubmit={handleSubmit(onLogin)} className="card-body">
+            <form onSubmit={handleSubmit(onLogin)} className="">
             
               <div className="form-control">
                 <input
@@ -53,17 +53,18 @@ const Login = () => {
                   className="focus:outline-none border-b-2 p-2"
                 />
                 {errors.password && <p className="text-red-600" role="alert">{errors.password?.message}</p>}
-                <label className="label">
+                {/* <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
                   </a>
-                </label>
+                </label> */}
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">{loading? <Spinner/>:'Login'}</button>
               </div>
             </form>
             <p>New to this website?<Link to='/register'>Register now</Link></p>
+            <div className="divider">OR</div>
           </div>
         </div>
       </div>

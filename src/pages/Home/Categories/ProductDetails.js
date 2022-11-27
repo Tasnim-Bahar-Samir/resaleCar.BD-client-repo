@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import OrderModal from '../../../Components/OrderModal';
 import ReportModal from '../../../Components/ReportModal';
-import Spinner from '../../../Components/Spinner';
 import Product from './Product';
 
 const ProductDetails = () => {
@@ -21,7 +20,9 @@ const ProductDetails = () => {
     
 
     console.log(products)
-
+    if(products?.length === 0){
+     return   <div className='h-screen flex items-center justify-center'><p className='text-xl font-semibold'>No products available in this category.Please visit other categories.</p></div>
+    }
    
     return (
     <div>

@@ -44,9 +44,9 @@ const AllSellers = () => {
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data)
       if(data.success){
         toast.success(data.message)
+        setDeletingData(null)
         refetch()
       }
     })
@@ -78,7 +78,7 @@ const AllSellers = () => {
                 <th>{index+1}</th>
                 <td>{seller.name}</td>
                 <td>{seller.email}</td>
-                <td>{seller.status? seller.status: <button onClick={()=> handleVerify(seller._id)} className="btn btn-sm">Verify</button>}</td>
+                <td className={`${seller?.status?"text-green-700 font-semibold": ''}`}>{seller.status? seller.status: <button onClick={()=> handleVerify(seller._id)} className="btn btn-sm">Verify</button>}</td>
                 <td><label onClick={() => setDeletingData(seller)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
               </tr>
             ))}

@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 
 const MyOrders = () => {
   const { user } = useContext(authProvider);
-  const { data } = useQuery({
+  const { data,isLoading } = useQuery({
     queryKey: [],
     queryFn: () =>
       fetch(`http://localhost:5000/orders?email=${user?.email}`, {
@@ -15,6 +16,9 @@ const MyOrders = () => {
       }).then((res) => res.json()),
   });
   const orders = data?.data;
+  if(orders?.length === 0){
+    return <div className="md:m-20 m-10"><p className="text-xl font-semibold">You have not ordered any product to show.</p></div>
+  }
   return (
     <>
       <div className="md:mx-20">
@@ -39,7 +43,7 @@ const MyOrders = () => {
                   <td>{order.price}</td>
                   <td>{
                     order?.paid ?
-                    <p>Paid</p>
+                    <p className="text-green-700 font-semibold">Paid</p>
                     :
                     <Link to={`/dashboard/payment/${order._id}`} className="btn btn-sm btn-secondary">Pay Now</Link>
                   }</td>

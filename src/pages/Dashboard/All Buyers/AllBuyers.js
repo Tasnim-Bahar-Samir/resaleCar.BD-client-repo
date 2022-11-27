@@ -4,7 +4,7 @@ import ConfirmationModal from "../../../Components/ConfirmationModal";
 
 const AllBuyers = () => {
   const [deletingData, setDeletingData] = useState(null)
-  const { data ={} } = useQuery({
+  const { data ={},refetch } = useQuery({
     queryKey: [],
     queryFn: () =>
       fetch("http://localhost:5000/users/buyer",{
@@ -27,7 +27,10 @@ const AllBuyers = () => {
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data)
+      if(data.success){
+        setDeletingData(null)
+        refetch()
+      }
     })
   }
 

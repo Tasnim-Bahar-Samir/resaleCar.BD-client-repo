@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 
 const CheckoutForm = ({order}) => {
-  const {buyerName,buyerEmail,price,_id} = order;
+  const {buyerName,buyerEmail,price,_id,productId} = order;
   const [cardError,setCardError] = useState('')
   const [successMessage,setSuccessMessage] = useState('')
   const [clientSecret,setClientSecret] = useState('')
@@ -11,6 +11,7 @@ const CheckoutForm = ({order}) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -65,6 +66,7 @@ const CheckoutForm = ({order}) => {
       }
       if(paymentIntent.status === 'succeeded'){
         const payment = {
+          productId,
           price,
           buyerEmail,
           orderId: _id,

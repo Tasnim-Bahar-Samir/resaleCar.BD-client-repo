@@ -15,7 +15,10 @@ import MyOrders from "../pages/MyOrders/MyOrders";
 import MyProduts from "../pages/MyProducts/MyProduts";
 import Payment from "../pages/Payment/Payment";
 import Register from "../pages/Register/Register";
+import AdminRoutes from "./AdminRoutes";
+import BuyerRoute from "./BuyerRoute";
 import ProtectedRoute from "./ProtectedRoute";
+import SellerRoute from "./SellerRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -59,27 +62,27 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/addProduct',
-                element:<AddProduct/>
+                element:<SellerRoute><AddProduct/></SellerRoute>
             },
             {
                 path:'/dashboard/allSellers',
-                element:<AllSellers/>
+                element:<AdminRoutes><AllSellers/></AdminRoutes>
             },
             {
                 path:'/dashboard/allBuyers',
-                element:<AllBuyers/>
+                element:<AdminRoutes><AllBuyers/></AdminRoutes>
             },
             {
                 path:'/dashboard/myProducts',
-                element:<MyProduts/>
+                element:<SellerRoute><MyProduts/></SellerRoute>
             },
             {
                 path:'/dashboard/myOrders',
-                element:<MyOrders/>
+                element:<BuyerRoute><MyOrders/></BuyerRoute>
             },
             {
                 path:'/dashboard/reportedItems',
-                element:<ReportedToAdmin/>
+                element:<AdminRoutes><ReportedToAdmin/></AdminRoutes>
             },
             {
                 path:'/dashboard/payment/:id',

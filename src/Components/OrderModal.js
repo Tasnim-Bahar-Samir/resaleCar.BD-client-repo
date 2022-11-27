@@ -1,13 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { authProvider } from '../Context/UserContext'
+import Spinner from './Spinner'
 
 const OrderModal = ({product,setProduct}) => {
     const {user} = useContext(authProvider)
+    const[loading,setLoading] = useState(false)
     const handleOrder = (e)=>{
+      setLoading(true)
         e.preventDefault()
         const form = e.target;
         const order = {
+            producId:product._id,
             productImage:product.image,
             productName: product.name,
             price: product.resalePrice,
@@ -27,6 +31,7 @@ const OrderModal = ({product,setProduct}) => {
         })
         .then(res => res.json())
         .then(data =>{
+          setLoading(false)
             if(data.success){
                 toast.success(data.message);
                 setProduct(null)
@@ -88,11 +93,8 @@ const OrderModal = ({product,setProduct}) => {
               className="input input-bordered w-full"
               required
             />
-            <input
-              type="submit"
-              value="Submit"
-              className="btn btn-accent input-bordered text-white w-full"
-            />
+            <button type="submit"
+              className="btn input-bordered text-white w-full">{loading ? <Spinner/>:'Submit'}</button>
           </form>
       </div>
     </div></div>

@@ -25,6 +25,7 @@ const Product = ({ product, setProduct }) => {
   };
   return (
     <div>
+      <h2 className="text-2xl text-center font-semibold my-5">Available car in {name} category</h2>
       <div className=" md:flex md:gap-10 border-2 items-center">
         <div className="">
           <img
@@ -43,6 +44,7 @@ const Product = ({ product, setProduct }) => {
               <label onClick={handleReport} htmlFor = 'report-modal' className=" underline cursor-pointer">Riport this product</label>
             </div>
           </div>
+          <div className="md:flex items-center gap-5">
           <h5 className="my-1">
             Orginal Price:
             <span className="text-md font-semibold text-red-600">
@@ -55,12 +57,14 @@ const Product = ({ product, setProduct }) => {
               TK {resalePrice}
             </span>
           </h5>
-          <p className="text-left my-1">{description}</p>
+          </div>
+          <p className="text-left my-1">About Procut: {description}</p>
+          <p className="my-1">Seller: {seller}</p>
           <div>
             <p>Phone: {phone}</p>
             <p>Location: {location}</p>
           </div>
-          <p>Seller: {seller}</p>
+          
           <div className="card-actions w-full justify-end">
             <label
               htmlFor="order-modal"
