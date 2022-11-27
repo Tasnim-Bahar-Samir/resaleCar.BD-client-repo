@@ -13,6 +13,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyOrders from "../pages/MyOrders/MyOrders";
 import MyProduts from "../pages/MyProducts/MyProduts";
+import Payment from "../pages/Payment/Payment";
 import Register from "../pages/Register/Register";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -80,6 +81,11 @@ export const router = createBrowserRouter([
                 path:'/dashboard/reportedItems',
                 element:<ReportedToAdmin/>
             },
+            {
+                path:'/dashboard/payment/:id',
+                element: <Payment/>,
+                loader: ({params})=> fetch(`http://localhost:5000/orders/${params.id}`)
+            }
         ]
     }
 ])

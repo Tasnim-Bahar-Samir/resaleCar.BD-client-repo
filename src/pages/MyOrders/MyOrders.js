@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { authProvider } from "../../Context/UserContext";
 
 const MyOrders = () => {
@@ -30,7 +31,7 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order,i) => (
+              {orders?.map((order,i) => (
                 <tr key={order._id}>
                   <th>{i+1}</th>
                   <td><img src={order.productImage} className='w-20 rounded-xl' alt="" /></td>
@@ -40,7 +41,7 @@ const MyOrders = () => {
                     order?.paid ?
                     <p>Paid</p>
                     :
-                    <button className="btn btn-sm btn-secondary">Pay Now</button>
+                    <Link to={`/dashboard/payment/${order._id}`} className="btn btn-sm btn-secondary">Pay Now</Link>
                   }</td>
                 </tr>
               ))}
