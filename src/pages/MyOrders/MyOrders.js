@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
 
 const MyOrders = () => {
@@ -15,6 +16,9 @@ const MyOrders = () => {
       }).then((res) => res.json()),
   });
   const orders = data?.data;
+  if(isLoading){
+    return <div className="h-96 flex items-center justify-center"><Spinner/></div>
+  }
   if(orders?.length === 0){
     return <div className="md:m-20 m-10"><p className="text-xl font-semibold">You have not ordered any product to show.</p></div>
   }

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ConfirmationModal from "../../../Components/ConfirmationModal";
 import toast from "react-hot-toast";
+import Spinner from "../../../Components/Spinner";
 
 const AllSellers = () => {
   const [deletingData, setDeletingData] = useState(null)
   console.log(deletingData)
-  const { data,refetch } = useQuery({
+  const { data,refetch,isLoading } = useQuery({
     queryKey: [],
     queryFn: () =>
       fetch("https://assignment-12-server-side-kohl.vercel.app/users/seller",{
@@ -15,6 +16,7 @@ const AllSellers = () => {
         }
       }).then((res) => res.json())
   });
+
 console.log(data)
 //verifying seller by admin
   const handleVerify = (id)=> {
@@ -31,6 +33,9 @@ console.log(data)
         refetch()
       }
     })
+  }
+  if(isLoading){
+    return <div className="h-96 flex items-center justify-center"><Spinner/></div>
   }
   const allSellers = data?.data
 //code for deleting seller

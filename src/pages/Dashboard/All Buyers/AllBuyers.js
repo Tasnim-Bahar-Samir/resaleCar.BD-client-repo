@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import ConfirmationModal from "../../../Components/ConfirmationModal";
+import Spinner from "../../../Components/Spinner";
 
 const AllBuyers = () => {
   const [deletingData, setDeletingData] = useState(null)
-  const { data ={},refetch } = useQuery({
+  const { data ={},refetch,isLoading } = useQuery({
     queryKey: [],
     queryFn: () =>
       fetch("https://assignment-12-server-side-kohl.vercel.app/users/buyer",{
@@ -33,7 +34,9 @@ const AllBuyers = () => {
       }
     })
   }
-
+  if(isLoading){
+    return <div className="h-96 flex items-center justify-center"><Spinner/></div>
+  }
   const AllBuyers = data?.data;
   return (
     <div className="md:mx-20"

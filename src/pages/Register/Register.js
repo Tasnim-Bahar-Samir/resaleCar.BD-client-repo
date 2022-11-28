@@ -130,9 +130,10 @@ const Register = () => {
                 <button className="btn btn-primary">{loading? <Spinner/>: 'Register'}</button>
               </div>
             </form>
-            <p>
-              Already have an account?<Link to="/register">Login now</Link>
+            <p className="my-2">
+              Already have an account?<Link to="/login">Login now</Link>
             </p>
+            <div className="divider">OR</div>
             <GoogleLogin/>
           </div>
         </div>
