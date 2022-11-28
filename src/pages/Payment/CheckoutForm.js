@@ -12,16 +12,19 @@ const CheckoutForm = ({order}) => {
 
   const stripe = useStripe();
   const elements = useElements();
-
+console.log(price)
   useEffect(() => {
-    fetch("https://assignment-12-server-side-kohl.vercel.app/create-payment-intent", {
+    fetch("http://localhost:5000/create-payment-intent", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: localStorage.getItem("relale_token"),
+      },
       body: JSON.stringify({ price }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+  }, [price]);
 
   const handleSubmit = async(e)=>{
     e.preventDefault()

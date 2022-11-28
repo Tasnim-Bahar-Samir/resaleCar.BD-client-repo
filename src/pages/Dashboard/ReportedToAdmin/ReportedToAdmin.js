@@ -2,16 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../../../Components/ConfirmationModal';
+import Spinner from '../../../Components/Spinner';
 
 const ReportedToAdmin = () => {
     const [deletingData, setDeletingData] = useState(null)
-    const{data,refetch} = useQuery({ 
+    const{data,refetch, isLoading} = useQuery({ 
         queryKey:[],
-        queryFn: ()=> fetch('https://assignment-12-server-side-kohl.vercel.app/product/reported',{
-            headers:{
-                authorization: localStorage.getItem('resale_token')
-              }
-        }).then(res => res.json())
+        queryFn: ()=> fetch('https://assignment-12-server-side-kohl.vercel.app/product/reported').then(res => res.json())
     })
 
 
@@ -39,10 +36,15 @@ const ReportedToAdmin = () => {
         })
     }
 
+    if(isLoading){
+        return <div className='flex h-96 items-center justify-center'><Spinner/></div>
+    }
+
     const reportedProducts = data?.data;
+    console.log(reportedProducts)
 
     if(reportedProducts?.length === 0){
-        return <div className="md:m-20 m-10"><p className="text-xl font-semibold">You have not published any product to show.</p></div>
+        return <div className="md:m-20 m-10"><p className="text-xl font-semibold">No report found to show.</p></div>
       }
   return (
     <div className='m-10'>

@@ -8,7 +8,11 @@ const AdvertisedProducts = () => {
     const [advertisedProducts, setAdvertisedProducts] = useState([])
     const [product , setProduct] = useState(null)
     useEffect(()=>{
-        axios.get('https://assignment-12-server-side-kohl.vercel.app/Products/advertised')
+        axios.get('https://assignment-12-server-side-kohl.vercel.app/products/advertised',{
+            headers:{
+                authorization: localStorage.getItem('resale_token')
+            }
+        })
     .then((res)=> {
         console.log(res.data.data)
         // setAdvertisedProducts(res.data.data)
