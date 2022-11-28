@@ -13,7 +13,6 @@ const ProductDetails = () => {
     const [products,setProducts] = useState([])
     const [product , setProduct] = useState(null)
     const [loading,setLoading] = useState(false)
-    console.log(products)
     useEffect(()=>{
         setLoading(true)
         fetch(`https://assignment-12-server-side-kohl.vercel.app/category/${name}`,{

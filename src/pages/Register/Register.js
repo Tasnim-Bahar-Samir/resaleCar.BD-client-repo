@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { authProvider } from "../../Context/UserContext";
@@ -35,8 +36,13 @@ const Register = () => {
           .then(() =>{})
           .catch(err => console.error(err))
           saveUserToDb(name,email,role)
+          setLoading(false)
         } )
-        .catch(err => console.error(err))
+        .catch(err => {
+          console.error(err)
+          toast.error(err.message)
+          setLoading(false)
+        })
   };
   const saveUserToDb = (name,email,role)=>{
     const user = {name,email,role}
@@ -58,7 +64,7 @@ const Register = () => {
       <div className="hero my-20">
         <div className="hero-content text-left">
           <div className="card w-[400px] shadow-2xl border-2 p-10">
-            <h1 className="text-2xl mt-5 mx-5">Register</h1>
+            <h1 className="text-2xl my-5 mx-5">Register</h1>
             <form onSubmit={handleSubmit(onRegister)} >
               <div className="form-control">
                 <input

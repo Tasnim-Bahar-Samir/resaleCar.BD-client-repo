@@ -24,6 +24,7 @@ const Login = () => {
     console.log(data)
     userLogin(email,password)
     .then(()=>{
+      setLoading(false)
       setUserEmail(email)
     })
     .catch(err => {

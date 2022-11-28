@@ -28,7 +28,7 @@ const AdvertisedProducts = () => {
     <>
     {
         advertisedProducts.length > 0 &&
-        <div className='my-12 md:mx-32 mx-4'>
+        <div className='my-12 md:mx-24 mx-4'>
             <h1 className='text-5xl text-center m-10 mb-5'>Advertised Products</h1>
     
             {advertisedProducts.map(product => <Product key={product._id} product={product} setProduct={setProduct}/>)}
