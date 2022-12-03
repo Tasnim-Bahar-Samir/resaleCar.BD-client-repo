@@ -8,7 +8,7 @@ const AllSellers = () => {
   const [deletingData, setDeletingData] = useState(null)
   console.log(deletingData)
   const { data,refetch,isLoading } = useQuery({
-    queryKey: [],
+    queryKey: ['seller'],
     queryFn: () =>
       fetch("https://assignment-12-server-side-kohl.vercel.app/users/seller",{
         headers: {

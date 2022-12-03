@@ -6,7 +6,7 @@ import Spinner from "../../../Components/Spinner";
 const AllBuyers = () => {
   const [deletingData, setDeletingData] = useState(null)
   const { data ={},refetch,isLoading } = useQuery({
-    queryKey: [],
+    queryKey: ['buyer'],
     queryFn: () =>
       fetch("https://assignment-12-server-side-kohl.vercel.app/users/buyer",{
         headers: {
