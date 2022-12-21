@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authProvider } from "../../Context/UserContext";
-import logo from '../../assets/images/logo.jpg'
 
 const Navbar = () => {
   const {user,userLogout} = useContext(authProvider)
@@ -14,17 +13,17 @@ const Navbar = () => {
   .catch(err => console.error(err))
   }
     const menuItem = <>
-        <li><NavLink className='ml-5 rounded-md' to='/'>Home</NavLink></li>
-        <li><NavLink className='ml-5 rounded-md' to='/blogs'>Blogs</NavLink></li>
+        <li><Link className='ml-5' to='/'>Home</Link></li>
+        <li><Link className='ml-5' to='/blogs'>Blogs</Link></li>
         
         {
           user?.uid ?
           <>
-            <li><NavLink className='ml-5 rounded-md' to='/dashboard'>Dashboard</NavLink></li>
-          <li onClick={handleLogout}><Link className='border-4 rounded-md border-blue-500 ml-5 text-blue-500'>Logout</Link></li>
+            <li><Link className='ml-5' to='/dashboard'>Dashboard</Link></li>
+          <li onClick={handleLogout}><Link className='bg-blue-600 text-white px-5 py-2 rounded-lg ml-5'>Logout</Link></li>
           </>
           :
-          <li><Link className="border-4 text-blue-500 rounded-md border-blue-500 ml-5" to='/login'>Login</Link></li>
+          <li><Link className=" bg-blue-600 text-white px-5 py-2 rounded-lg ml-5" to='/login'>Login</Link></li>
         }
     </>
   return (
@@ -57,7 +56,7 @@ const Navbar = () => {
               }
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl text-blue-500">ResaleCar.Bd</Link>
+          <Link to='/' className="normal-case font-bold text-xl text-blue-500">ResaleCar.Bd</Link>
         </div>
         <div className="navbar-center hidden lg:flex ml-auto">
           <ul className="menu menu-horizontal p-0">

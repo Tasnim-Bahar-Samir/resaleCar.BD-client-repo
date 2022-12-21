@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authProvider } from "../../../Context/UserContext";
 import{GoVerified} from "react-icons/go"
+import {MdOutlineReport} from 'react-icons/md'
+
 
 const Product = ({ product, setProduct }) => {
   const { user } = useContext(authProvider);
@@ -30,7 +32,7 @@ const Product = ({ product, setProduct }) => {
         <div className="">
           <img
             src={image}
-            className="md:w-44 md:h-44 w-full md:mt-6 md:m-3"
+            className="md:w-96 md:h-64 w-full md:mt-6 md:m-3"
             alt=""
           />
         </div>
@@ -41,7 +43,7 @@ const Product = ({ product, setProduct }) => {
               <p>{postingTime}</p>
             </div>
             <div>
-              <label onClick={handleReport} htmlFor = 'report-modal' className=" underline cursor-pointer">Riport this product</label>
+              <label onClick={handleReport} htmlFor = 'report-modal' className = "cursor-pointer flex items-center text-red-500 underline"><MdOutlineReport/>Report</label>
             </div>
           </div>
           <div className="md:flex items-center gap-5">

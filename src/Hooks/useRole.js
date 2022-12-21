@@ -7,9 +7,11 @@ const useRole = (email)=>{
     const[isLoading,setIsLoading] = useState(true)
 useEffect(()=>{
     if(email){
+        console.log(email)
         fetch(`https://assignment-12-server-side-kohl.vercel.app/users/admin/${email}`)
         .then(res => res.json())
         .then(data=>{
+            console.log(data)
             setIsLoading(false)
             if(data.admin){
                 setIsAdmin(true)
