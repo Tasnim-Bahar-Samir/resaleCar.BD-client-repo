@@ -2,7 +2,7 @@ import React from "react";
 
 const ConfirmationModal = ({title,desc,data,closeModal,modalAction}) => {
   return (
-    <div>
+    <div className="z-10">
       <input type="checkbox" id="confirmation-modal" className="modal-toggle"/>
       <div className="modal">
         <div className="modal-box">
