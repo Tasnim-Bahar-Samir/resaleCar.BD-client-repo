@@ -23,7 +23,7 @@ const Navbar = () => {
           <li onClick={handleLogout}><Link className='bg-blue-600 text-white px-5 py-2 rounded-lg ml-5'>Logout</Link></li>
           </>
           :
-          <li><Link className=" bg-blue-600 text-white px-5 py-2 rounded-lg ml-5" to='/login'>Login</Link></li>
+          <li><Link className=" bg-blue-600 text-white px-7 rounded-tl-lg py-2 rounded-br-lg ml-5" to='/login'>Login</Link></li>
         }
     </>
   return (

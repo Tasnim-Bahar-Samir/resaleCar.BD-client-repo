@@ -55,7 +55,7 @@ const Product = ({ product, setProduct }) => {
           </h5>
           <h5>
             Resale Price:
-            <span className="text-md font-semibold text-green-700">
+            <span className="text-md font-semibold text-blue-700">
               TK {resalePrice}
             </span>
           </h5>
@@ -71,7 +71,7 @@ const Product = ({ product, setProduct }) => {
             <label
               htmlFor="order-modal"
               onClick={handleOrder}
-              className="btn btn-primary"
+              className="px-3 py-2 rounded-tl-md rounded-br-md cursor-pointer bg-blue-500 text-white"
             >
               Proceed Order
             </label>

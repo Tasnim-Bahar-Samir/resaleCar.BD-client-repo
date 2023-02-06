@@ -34,11 +34,11 @@ const Login = () => {
     })
   }
   return (
-    <div>
-      <div className="hero my-20">
-        <div className="hero-content text-left">
-          <div className="card w-[400px] shadow-2xl border-2 p-10">
-          <h1 className="text-2xl my-5 mx-5">Login now</h1>
+    <div className="">
+      <div className=" my-20 bg-blue-500 p-3 rounded-md w-[500px] min-h-[450px] mx-auto relative">
+        <div className="text-left">
+          <div className="w-full h-full rounded-md border-2 p-10 bg-white absolute right-2 bottom-2">
+          <h1 className="text-2xl mb-5 mx-5">Login now</h1>
             <form onSubmit={handleSubmit(onLogin)} className="">
             
               <div className="form-control">
@@ -66,11 +66,11 @@ const Login = () => {
                 </label> */}
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">{loading? <Spinner/>:'Login'}</button>
+                <button className="bg-blue-500 rounded-md text-white p-3 mb-1">{loading? <Spinner/>:'Login'}</button>
               {error && <p className="text-red-700 text-lg">{error}</p> }
               </div>
             </form>
-            <p>New to this website?<Link className=" underline" to='/register'>Register now</Link></p>
+            <p className="text-sm">New to this website?<Link className=" underline text-blue-600" to='/register'>Register now</Link></p>
             <div className="divider">OR</div>
             <GoogleLogin/>
           </div>

@@ -61,9 +61,9 @@ const Register = () => {
   }
   return (
     <div>
-      <div className="hero my-20">
-        <div className="hero-content text-left">
-          <div className="card w-[400px] shadow-2xl border-2 p-10">
+      <div className=" my-20 bg-blue-500 p-3 rounded-md w-[500px] min-h-[600px] mx-auto relative">
+        <div className="text-left">
+          <div className="w-full h-full rounded-md border-2 p-10 bg-white absolute right-2 bottom-2">
             <h1 className="text-2xl my-5 mx-5">Register</h1>
             <form onSubmit={handleSubmit(onRegister)} >
               <div className="form-control">
@@ -127,7 +127,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">{loading? <Spinner/>: 'Register'}</button>
+                <button className="bg-blue-500 rounded-md text-white p-3 mb-1">{loading? <Spinner/>: 'Register'}</button>
               </div>
             </form>
             <p className="my-2">
